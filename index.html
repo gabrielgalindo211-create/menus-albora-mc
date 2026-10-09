@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#24170f">
+<title>Menús | ALBORA & MC Burger</title>
+<style>
+:root{--cream:#f5ecdc;--paper:#fffaf0;--brown:#4a2b18;--red:#e51e2a;--black:#0b0b0b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--brown);font-family:Georgia,"Times New Roman",serif}
+.hero{min-height:72vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:50px 20px;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 35%,rgba(185,139,85,.18),transparent 35%),var(--paper)}
+.hero-inner{max-width:800px;position:relative;z-index:1}
+.kicker{text-transform:uppercase;letter-spacing:4px;font-size:12px;opacity:.65}
+h1{font-size:clamp(48px,11vw,90px);margin:16px 0 8px;letter-spacing:2px}
+.tagline{font-size:clamp(18px,4vw,26px);font-style:italic;margin-bottom:28px}
+.cta{display:inline-block;padding:14px 25px;border-radius:999px;background:var(--brown);color:#fff;text-decoration:none;font-family:Arial,sans-serif;font-weight:700}
+.menus{max-width:1200px;margin:auto;padding:60px 18px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.card{border-radius:24px;overflow:hidden;box-shadow:0 15px 45px rgba(40,24,12,.15);cursor:pointer}
+.card.albora{background:var(--paper)}.card.mc{background:#101010;color:#fff}
+.preview{height:600px;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:10px}
+.albora .preview{background:#eadfce}.mc .preview{background:#111}
+.preview img{width:100%;height:100%;object-fit:contain}
+.info{padding:22px 24px 26px}.brand{font-size:30px;margin:0 0 5px}.desc{margin:0 0 18px;opacity:.75;line-height:1.45}
+.btn{display:inline-block;padding:12px 20px;border-radius:999px;font-family:Arial,sans-serif;font-size:14px;font-weight:700}
+.albora .btn{background:var(--brown);color:#fff}.mc .btn{background:var(--red);color:#fff}
+.links{max-width:850px;margin:35px auto 0;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.link{padding:17px 10px;text-align:center;border-radius:16px;background:var(--paper);color:var(--brown);text-decoration:none;font-family:Arial,sans-serif;font-weight:700}
+.link span{display:block;font-size:23px;margin-bottom:6px}
+footer{text-align:center;background:#21160f;color:#e9dbc7;padding:35px 20px;font-size:13px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.9);display:none;z-index:20;padding:12px}
+.modal.open{display:flex;align-items:center;justify-content:center}.viewer{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.viewer img{max-width:100%;max-height:96vh;object-fit:contain}
+.close{position:absolute;right:15px;top:15px;width:45px;height:45px;border:0;border-radius:50%;background:#fff;font-size:30px;cursor:pointer}
+@media(max-width:760px){.grid{grid-template-columns:1fr}.menus{padding:45px 12px}.preview{height:470px}.links{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <div class="kicker">Menús digitales</div>
+    <h1>ALBORA & MC Burger</h1>
+    <div class="tagline">Elige tu menú y disfruta.</div>
+    <a class="cta" href="#menus">VER MENÚS ↓</a>
+  </div>
+</header>
+
+<main class="menus" id="menus">
+  <div class="grid">
+    <article class="card albora" onclick="openMenu('albora')">
+      <div class="preview"><img src="albora.png" alt="Menú ALBORA"></div>
+      <div class="info">
+        <h2 class="brand">ALBORA</h2>
+        <p class="desc">Coffee · Frappés · Brunch</p>
+        <span class="btn">Ver menú completo</span>
+      </div>
+    </article>
+
+    <article class="card mc" onclick="openMenu('mc')">
+      <div class="preview"><img src="mc-burger.jpg" alt="Menú MC Burger"></div>
+      <div class="info">
+        <h2 class="brand">MC Burger</h2>
+        <p class="desc">Hamburguesas · Hot Dogs · Para picar</p>
+        <span class="btn">Ver menú completo</span>
+      </div>
+    </article>
+  </div>
+
+  <div class="links">
+    <a class="link" href="https://wa.me/525665415512?text=Hola%20ALBORA%2C%20quiero%20hacer%20un%20pedido." target="_blank"><span>◉</span>WhatsApp ALBORA</a>
+    <a class="link" href="https://www.ubereats.com/mx/store/albora/5v-enY_BXx-ooVHWibQMWA" target="_blank"><span>🛵</span>Uber Eats</a>
+    <a class="link" href="https://c-h5.didi-food.com/es-MX/deeplink?appName=sodaCustomer&path=businessPage&shopId=5764615985651516893" target="_blank"><span>🛵</span>DiDi Food</a>
+    <a class="link" href="https://www.instagram.com/albora_coffe/" target="_blank"><span>◎</span>Instagram</a>
+  </div>
+</main>
+
+<footer>ALBORA & MC Burger · Menú digital</footer>
+
+<div class="modal" id="modal" onclick="closeMenu(event)">
+  <button class="close" onclick="closeMenu()">×</button>
+  <div class="viewer"><img id="modalImg" src="" alt="Menú ampliado"></div>
+</div>
+<script>
+function openMenu(x){document.getElementById('modalImg').src=x==='albora'?'albora.png':'mc-burger.jpg';document.getElementById('modal').classList.add('open');document.body.style.overflow='hidden'}
+function closeMenu(e){if(e&&e.target.id!=='modal'&&!e.target.classList.contains('close'))return;document.getElementById('modal').classList.remove('open');document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()})
+</script>
+</body>
+</html>
